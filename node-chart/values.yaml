@@ -1,0 +1,13 @@
+backend:
+  name: backend
+  replicas: 1
+  image: nursultannd/backend:9
+  containerPort: 3001
+  serviceName: backend-service
+  nodePort: 30000
+mongo:
+  name: mongo
+  replicas: 1
+  serviceName: mongo-service
+  username: bnVyc3VsdGFubmQK
+  password: bXlwYXNzMTIzCg==

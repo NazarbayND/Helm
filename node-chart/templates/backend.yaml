@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: { { .Values.backend.name } }
+  labels:
+    app: { { .Values.backend.name } }
+spec:
+  replicas: { { .Values.backend.replicas } }
+  selector:
+    matchLabels:
+      app: { { .Values.backend.name } }
+  template:
+    metadata:
+      labels:
+        app: { { .Values.backend.name } }
+    spec:
+      containers:
+        - name: { { .Values.backend.name } }
+          image: { { .Values.backend.image } }
+          ports:
+            - containerPort: { { .Values.backend.containerPort } }
+          env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-username
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-root-password
+            - name: MONGO_DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: database_url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: { { .Values.backend.serviceName } }
+spec:
+  selector:
+    app: { { .Values.backend.name } }
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: { { .Values.backend.containerPort } }
+      targetPort: { { .Values.backend.containerPort } }
+      nodePort: { { .Values.backend.nodePort } }

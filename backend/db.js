@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_DB_URL } = process.env;
 
 const dbUrl =
-  `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_DB_URL}/users` ||
-  "mongodb://localhost/users";
+  `mongodb://root:sa-homework@${MONGO_DB_URL}/users`;
 
 const connect = async () => {
   await mongoose.connect(dbUrl, {

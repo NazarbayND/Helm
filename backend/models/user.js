@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Movie = mongoose.model(
+const User = mongoose.model(
   "User",
   new mongoose.Schema({
     name: {
@@ -10,4 +10,4 @@ const Movie = mongoose.model(
   })
 );
 
-module.exports = Movie;
+module.exports = User;

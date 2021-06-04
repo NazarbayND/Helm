@@ -1,4 +1,4 @@
-# 2) helm install my-app ./node-chart
+# 2) helm install my-app ./app-chart
 
 # 3) migration files is placed at migrations folder
 

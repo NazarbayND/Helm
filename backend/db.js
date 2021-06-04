@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_DB_URL } = process.env;
 
-const dburl = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_DB_URL}/users`;
+const dbUrl =
+  `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_DB_URL}/users` ||
+  "mongodb://localhost/users";
 
-const dbUrl = "mongodb://localhost/users";
 const connect = async () => {
   await mongoose.connect(dbUrl, {
     useUnifiedTopology: true,
